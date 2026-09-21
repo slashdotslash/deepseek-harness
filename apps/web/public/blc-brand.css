@@ -4,3 +4,7 @@
 [class*="brandName"] { font-size: 0 !important; }
 [class*="brandName"] > * { display: none !important; }
 [class*="brandName"]::after { content: "DeepSeek Harness"; font-size: 13px; font-weight: 650; letter-spacing: -.02em; }
+[class*="fishHitbox"] { background: url('/blc-logo.svg') center / contain no-repeat; width: 34px; height: 34px; }
+[class*="fishHitbox"] > * { visibility: hidden; }
+[class*="titleGroup"] > span:first-child { font-size: 0 !important; }
+[class*="titleGroup"] > span:first-child::after { content: "DeepSeek Harness"; font-size: 28px; font-weight: 600; letter-spacing: -.03em; }

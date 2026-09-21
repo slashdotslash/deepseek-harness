@@ -1,13 +1,13 @@
 {
   "id": "/",
-  "name": "DeepSeek Harness",
-  "short_name": "DSH",
+  "name": "BLC Harness",
+  "short_name": "BLC Harness",
   "start_url": "/",
   "scope": "/",
   "display": "fullscreen",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/blc-logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"

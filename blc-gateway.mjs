@@ -31,9 +31,14 @@ process.on('SIGTERM', () => child.kill('SIGTERM'))
 const css = await readFile('/opt/blc-harness/blc-brand.css')
 const logo = await readFile('/opt/blc-harness/blc-logo.svg')
 const server = http.createServer((req, res) => {
-  if (req.url === '/blc-brand.css' || req.url === '/blc-logo.svg') {
-    res.setHeader('content-type', req.url.endsWith('.css') ? 'text/css' : 'image/svg+xml')
-    res.end(req.url.endsWith('.css') ? css : logo); return
+  const pathname = new URL(req.url, 'http://localhost').pathname
+  if (pathname === '/manifest.webmanifest') {
+    res.setHeader('content-type', 'application/manifest+json')
+    res.end(JSON.stringify({id:'/', name:'BLC Harness', short_name:'BLC Harness', start_url:'/', scope:'/', display:'standalone', icons:[{src:'/blc-logo.svg',sizes:'any',type:'image/svg+xml',purpose:'any'}]})); return
+  }
+  if (['/blc-brand.css', '/blc-logo.svg', '/favicon.svg', '/favicon.ico'].includes(pathname)) {
+    res.setHeader('content-type', pathname.endsWith('.css') ? 'text/css' : 'image/svg+xml')
+    res.end(pathname.endsWith('.css') ? css : logo); return
   }
   if (!authCookie) {res.writeHead(503);res.end('Harness is starting');return}
   const headers = { ...req.headers, host:'ai.betterlife.team:10443', cookie:authCookie, 'accept-encoding': 'identity' }; delete headers.authorization

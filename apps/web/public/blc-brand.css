@@ -1,0 +1,6 @@
+/* BLC.AI deployment branding; upstream application behavior is unchanged. */
+[class*="brandMark"] { background: url('/blc-logo.svg') center / contain no-repeat; width: 28px; height: 28px; }
+[class*="brandMark"] > * { visibility: hidden; }
+[class*="brandName"] { font-size: 0 !important; }
+[class*="brandName"] > * { display: none !important; }
+[class*="brandName"]::after { content: "DeepSeek Harness"; font-size: 13px; font-weight: 650; letter-spacing: -.02em; }

@@ -1,0 +1,12 @@
+FROM node:24-bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends git python3 python3-venv ripgrep ca-certificates curl make g++ && rm -rf /var/lib/apt/lists/*
+RUN npm install -g @deepseek-ai/dsh@0.1.6-alpha.2 pnpm@11.17.0
+WORKDIR /opt/blc-harness
+COPY blc-gateway.mjs ./
+COPY apps/web/public/blc-logo.svg apps/web/public/blc-brand.css ./
+RUN mkdir -p /workspace/blc-ai /home/node/.dsh && chown -R node:node /workspace /home/node/.dsh
+USER node
+ENV DSH_HOME=/home/node/.dsh NODE_USE_ENV_PROXY=1
+WORKDIR /workspace/blc-ai
+EXPOSE 3081
+CMD ["node", "/opt/blc-harness/blc-gateway.mjs"]

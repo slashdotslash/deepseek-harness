@@ -1,6 +1,6 @@
 # BLC.AI browser deployment
 
-This fork customizes the Web shell favicon and sidebar wordmark for BLC.AI. It retains the upstream DeepSeek Harness name and MIT license. `apps/web/public/blc-brand.css` applies the deployment branding; `blc-logo.svg` is the BLC.AI logo.
+This fork presents the editor as BLC Harness and retains the upstream MIT license. The gateway replaces the product name in browser assets and the page title. `apps/web/public/blc-brand.css` applies the BLC.AI logo to the full sidebar, collapsed rail and welcome screen, keeps the mark square and hides the upstream Preview badge; `blc-logo.svg` is the original BLC.AI logo.
 
 The production integration runs the official dsh profile on loopback inside a dedicated container. A local gateway serves the branded frontend and forwards API traffic. The external reverse proxy authenticates every request against the BLC.AI main-administrator session. Do not expose the unprotected dsh listener or mount the Docker socket, host SSH credentials, application secrets, or other projects.
 

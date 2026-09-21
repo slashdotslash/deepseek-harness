@@ -38,10 +38,12 @@ const server = http.createServer((req, res) => {
   if (!authCookie) {res.writeHead(503);res.end('Harness is starting');return}
   const headers = { ...req.headers, host:'ai.betterlife.team:10443', cookie:authCookie, 'accept-encoding': 'identity' }; delete headers.authorization
   const upstream = http.request({ host: '127.0.0.1', port: 3080, path: req.url, method: req.method, headers }, response => {
-    if (String(response.headers['content-type']).includes('text/html')) {
+    const contentType = String(response.headers['content-type'])
+    if (contentType.includes('text/html') || contentType.includes('javascript')) {
       const chunks = []; response.on('data', part => chunks.push(part)); response.on('end', () => {
-        const body = Buffer.concat(chunks).toString().replace(/<title>[^<]*<\/title>/, '<title>DeepSeek Harness · BLC.AI</title>').replace('</head>', '<link rel="stylesheet" href="/blc-brand.css"><link rel="icon" href="/blc-logo.svg"></head>')
-        const out = { ...response.headers }; delete out['content-length']; delete out['content-encoding']; delete out['x-frame-options']; delete out['set-cookie']
+        let body = Buffer.concat(chunks).toString().replaceAll('DeepSeek Harness', 'BLC Harness')
+        if (contentType.includes('text/html')) body = body.replace(/<title>[^<]*<\/title>/, '<title>BLC Harness · BLC.AI</title>').replace('</head>', '<link rel="stylesheet" href="/blc-brand.css"><link rel="icon" href="/blc-logo.svg"></head>')
+        const out = { ...response.headers }; delete out['content-length']; delete out['content-encoding']; delete out['x-frame-options']; delete out['set-cookie']; delete out.etag
         res.writeHead(response.statusCode ?? 502, out); res.end(body)
       })
     } else { const out = { ...response.headers }; delete out['set-cookie']; res.writeHead(response.statusCode ?? 502, out); response.pipe(res) }

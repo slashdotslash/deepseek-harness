@@ -1,10 +1,15 @@
-/* BLC.AI deployment branding; upstream application behavior is unchanged. */
-[class*="brandMark"] { background: url('/blc-logo.svg') center / contain no-repeat; width: 28px; height: 28px; }
-[class*="brandMark"] > * { visibility: hidden; }
+/* BLC product identity. Square marks retain their proportions at every width. */
+[class*="brandMark"], [class*="railMark"], [class*="fishHitbox"] {
+  background: url('/blc-logo.svg') center / contain no-repeat !important;
+  flex-shrink: 0 !important;
+  aspect-ratio: 1;
+}
+[class*="brandMark"], [class*="railMark"] { width: 24px !important; height: 24px !important; }
+[class*="fishHitbox"] { width: 34px !important; height: 34px !important; }
+[class*="brandMark"] > *, [class*="railMark"] > *, [class*="fishHitbox"] > * { visibility: hidden !important; }
 [class*="brandName"] { font-size: 0 !important; }
 [class*="brandName"] > * { display: none !important; }
-[class*="brandName"]::after { content: "DeepSeek Harness"; font-size: 13px; font-weight: 650; letter-spacing: -.02em; }
-[class*="fishHitbox"] { background: url('/blc-logo.svg') center / contain no-repeat; width: 34px; height: 34px; }
-[class*="fishHitbox"] > * { visibility: hidden; }
+[class*="brandName"]::after { content: "BLC Harness"; font-size: 15px; font-weight: 650; letter-spacing: -.02em; white-space: nowrap; }
 [class*="titleGroup"] > span:first-child { font-size: 0 !important; }
-[class*="titleGroup"] > span:first-child::after { content: "DeepSeek Harness"; font-size: 28px; font-weight: 600; letter-spacing: -.03em; }
+[class*="titleGroup"] > span:first-child::after { content: "BLC Harness"; font-size: 28px; font-weight: 600; letter-spacing: -.03em; }
+[class*="previewBadge"] { display: none !important; }
